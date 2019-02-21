@@ -1,15 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
 plugins {
+    id 'java-library'
     id 'groovy'
 }
 
 group 'io-vertx'
 version '1.0.0'
 
+sourceCompatibility = 1.8
+
 repositories {
+    jcenter()
     mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
 }
 
+def groovyVersion = "3.0.0-alpha-4"
+def vertxVersion = '3.6.3'
+
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.jboss.resteasy:resteasy-vertx:4.0.0.Beta8'
+    compile "org.codehaus.groovy:groovy:$groovyVersion"
+    compileOnly "org.codehaus.groovy:groovy-json:$groovyVersion"
+    compileOnly "io.vertx:vertx-core:$vertxVersion"
+    compileOnly "io.vertx:vertx-web:$vertxVersion"
+    testCompile('org.junit.jupiter:junit-jupiter:5.4.0')
 }
