@@ -36,3 +36,14 @@ dependencies {
     compileOnly "io.vertx:vertx-web:$vertxVersion"
     testCompile('org.junit.jupiter:junit-jupiter:5.4.0')
 }
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'VertX Restful',
+                'Implementation-Version': version
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
